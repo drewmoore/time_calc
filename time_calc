@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+
+def total_time(start_time, end_time)
+  (time_to_float(end_time) - time_to_float(start_time)).round(2)
+end
+
+def time_to_float(time)
+  hours_minutes = time.split(':').map(&:to_f)
+  minute_ratio = hours_minutes.last / 60.0
+  hours_minutes.first + minute_ratio
+end
+
+def time_to_string(float)
+  hours_minutes = float.to_s.split('.')
+  minute_string = (hours_minutes.last.to_f * 60.0 / 100).round.to_s
+  "#{ hours_minutes.first }:#{ minute_string }"
+end
+
+grand_total = 0.0
+
+puts "Time Format    : 24:00"
+
+puts "\n"
+
+until false
+  print "Start Time     : "
+  start_time = gets.chomp!
+  print "End Time       : "
+  end_time = gets.chomp!
+
+  puts "\n"
+
+  this_total   = total_time(start_time, end_time)
+  grand_total += this_total
+
+  puts "This Total     : #{ time_to_string(this_total) } or #{ this_total }"
+  puts "Running Total  : #{ time_to_string(grand_total) } or #{ grand_total }"
+
+  puts "\n"
+  puts "\n"
+end
